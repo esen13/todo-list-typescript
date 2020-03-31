@@ -1,18 +1,21 @@
 import React, {useState} from "react";
 
-export const TodoForm:React.FC = () => {
+type TodoFormProps = {
+    onAdd(title: string): void
+}
+
+export const TodoForm:React.FC<TodoFormProps> = ({onAdd}) => {
     const [title, setTitle] = useState('');
 
     const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         setTitle(event.target.value);
-        console.log(title)
     };
 
     const addTodo = () => {
         if(!title.trim()) {
             return alert('введите название');
         }
-        console.log(title);
+        onAdd(title);
         setTitle('');
     };
 
